@@ -3,11 +3,15 @@ from dict import read_dict
 import colorama as color
 from sys import stdout
 
+GRID = 'grid.txt'
+DICT = 'british.dict'
+MIN_LEN = 5
+
 def read_grid(filename):
   with open(filename) as grid:
     return [s.strip().lower() for s in grid]
 
-def solve_grid(grid, words, min_len = 4):
+def solve_grid(grid, words, min_len):
   """Finds horizontal and vertical words in a grid."""
   h = len(grid)
   w = len(grid[0])
@@ -36,9 +40,9 @@ def solve_grid(grid, words, min_len = 4):
 def main():
   color.init()
 
-  grid = read_grid('grid.txt')
-  words = read_dict('british')
-  marked, found = solve_grid(grid, words)
+  grid = read_grid(GRID)
+  words = read_dict(DICT)
+  marked, found = solve_grid(grid, words, MIN_LEN)
 
   print(found)
   for y, row in enumerate(marked):
